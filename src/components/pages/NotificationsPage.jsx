@@ -49,29 +49,21 @@ const handleNotificationClick = async (notification) => {
         )
       );
 
-      // Navigate to appropriate detail view
+      // Navigate to appropriate existing routes
       if (notification.actionUrl) {
         navigate(notification.actionUrl);
       } else {
-        // Fallback navigation based on notification type
+        // Fallback navigation to existing routes only
         switch (notification.type) {
           case "like":
           case "comment":
           case "mention":
-            // Navigate to the post (assuming postId is available)
-            if (notification.postId) {
-              navigate(`/post/${notification.postId}`);
-            } else {
-              navigate("/");
-            }
+            // Navigate to home feed where posts are displayed
+            navigate("/");
             break;
           case "follow":
-            // Navigate to the user's profile
-            if (notification.userId) {
-              navigate(`/profile/${notification.userId}`);
-            } else {
-              navigate("/profile");
-            }
+            // Navigate to profile page
+            navigate("/profile");
             break;
           default:
             navigate("/");

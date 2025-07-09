@@ -13,7 +13,7 @@ const UsersList = ({ searchQuery = "", variant = "suggestions" }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const loadUsers = async () => {
+const loadUsers = async () => {
     try {
       setLoading(true);
       setError(null);
@@ -30,6 +30,33 @@ const UsersList = ({ searchQuery = "", variant = "suggestions" }) => {
           user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
           user.displayName.toLowerCase().includes(searchQuery.toLowerCase())
         );
+      } else if (variant === "suggestions") {
+        // For friend suggestions, calculate mutual connections and sort by them
+        const currentUserId = 1; // Mock current user ID
+        
+        // Filter out current user and already followed users
+        const unfollowedUsers = usersData.filter(user => 
+          user.Id !== currentUserId && 
+          !followsData.some(follow => 
+            follow.followerId === currentUserId && follow.followingId === user.Id
+          )
+        );
+        
+        // Calculate mutual connections for each user
+        const usersWithMutualConnections = await Promise.all(
+          unfollowedUsers.map(async (user) => {
+            const mutualConnections = await followsService.getMutualConnections(currentUserId, user.Id);
+            return {
+              ...user,
+              mutualConnections: mutualConnections.length
+            };
+          })
+        );
+        
+        // Sort by mutual connections (descending) and take top suggestions
+        filteredUsers = usersWithMutualConnections
+          .sort((a, b) => b.mutualConnections - a.mutualConnections)
+          .slice(0, 12); // Show top 12 friend suggestions
       }
       
       setUsers(filteredUsers);
@@ -84,7 +111,7 @@ const UsersList = ({ searchQuery = "", variant = "suggestions" }) => {
     );
   }
 
-  return (
+return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {users.map((user) => (
         <motion.div
@@ -98,6 +125,8 @@ const UsersList = ({ searchQuery = "", variant = "suggestions" }) => {
             onFollow={handleFollow}
             onUnfollow={handleUnfollow}
             isFollowing={isFollowing(user.Id)}
+            showMutualConnections={variant === "suggestions"}
+            mutualConnections={user.mutualConnections}
           />
         </motion.div>
       ))}

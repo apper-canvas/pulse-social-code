@@ -74,7 +74,26 @@ class FollowsService {
 
   async getFollowingCount(userId) {
     await this.delay();
-    return this.follows.filter(follow => follow.followerId === parseInt(userId)).length;
+return this.follows.filter(follow => follow.followerId === parseInt(userId)).length;
+  }
+
+  async getMutualConnections(userId1, userId2) {
+    await this.delay();
+    
+    // Get people that userId1 follows
+    const user1Following = this.follows
+      .filter(follow => follow.followerId === parseInt(userId1))
+      .map(follow => follow.followingId);
+    
+    // Get people that userId2 follows
+    const user2Following = this.follows
+      .filter(follow => follow.followerId === parseInt(userId2))
+      .map(follow => follow.followingId);
+    
+    // Find mutual connections (people both users follow)
+    const mutualConnections = user1Following.filter(id => user2Following.includes(id));
+    
+    return mutualConnections.map(id => ({ userId: id }));
   }
 }
 

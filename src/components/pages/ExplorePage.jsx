@@ -53,11 +53,16 @@ const ExplorePage = () => {
 
           {/* Trending Section */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
+<div className="lg:col-span-2">
               <h2 className="text-2xl font-semibold text-white mb-6">
-                {searchQuery ? `Search Results for "${searchQuery}"` : "Suggested Users"}
+                {searchQuery ? `Search Results for "${searchQuery}"` : "Friend Suggestions"}
               </h2>
-              <UsersList searchQuery={searchQuery} />
+              {!searchQuery && (
+                <p className="text-gray-400 mb-6">
+                  Connect with people you may know through mutual connections
+                </p>
+              )}
+              <UsersList searchQuery={searchQuery} variant="suggestions" />
             </div>
 
             {/* Trending Sidebar */}

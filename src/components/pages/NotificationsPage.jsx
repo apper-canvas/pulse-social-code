@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
@@ -9,8 +10,10 @@ import Empty from "@/components/ui/Empty";
 import ApperIcon from "@/components/ApperIcon";
 import { formatDistanceToNow } from "date-fns";
 import { notificationsService } from "@/services/api/notificationsService";
+import { toast } from "react-toastify";
 
 const NotificationsPage = () => {
+  const navigate = useNavigate();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,18 +37,51 @@ const NotificationsPage = () => {
     loadNotifications();
   }, []);
 
-  const handleMarkAsRead = async (notificationId) => {
+const handleNotificationClick = async (notification) => {
     try {
-      await notificationsService.markAsRead(notificationId);
+      // Mark as read first
+      await notificationsService.markAsRead(notification.Id);
       setNotifications(prev => 
-        prev.map(notification => 
-          notification.Id === notificationId 
-            ? { ...notification, isRead: true }
-            : notification
+        prev.map(n => 
+          n.Id === notification.Id 
+            ? { ...n, isRead: true }
+            : n
         )
       );
+
+      // Navigate to appropriate detail view
+      if (notification.actionUrl) {
+        navigate(notification.actionUrl);
+      } else {
+        // Fallback navigation based on notification type
+        switch (notification.type) {
+          case "like":
+          case "comment":
+          case "mention":
+            // Navigate to the post (assuming postId is available)
+            if (notification.postId) {
+              navigate(`/post/${notification.postId}`);
+            } else {
+              navigate("/");
+            }
+            break;
+          case "follow":
+            // Navigate to the user's profile
+            if (notification.userId) {
+              navigate(`/profile/${notification.userId}`);
+            } else {
+              navigate("/profile");
+            }
+            break;
+          default:
+            navigate("/");
+        }
+      }
+      
+      toast.success("Notification opened");
     } catch (err) {
-      console.error("Failed to mark as read:", err);
+      console.error("Failed to handle notification:", err);
+      toast.error("Failed to open notification");
     }
   };
 
@@ -174,7 +210,7 @@ const NotificationsPage = () => {
                       ? "border-gray-700 hover:border-gray-600" 
                       : "border-primary/50 bg-primary/5"
                   }`}
-                  onClick={() => handleMarkAsRead(notification.Id)}
+onClick={() => handleNotificationClick(notification)}
                 >
                   <div className="flex items-start space-x-4">
                     <div className={`p-2 rounded-full ${

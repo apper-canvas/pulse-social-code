@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
@@ -6,15 +6,28 @@ import Textarea from "@/components/atoms/Textarea";
 import ApperIcon from "@/components/ApperIcon";
 import { toast } from "react-toastify";
 import { hashtagService } from "@/services/api/hashtagService";
+
+const EMOJI_CATEGORIES = {
+  smileys: ['😀', '😃', '😄', '😁', '😊', '😍', '🤩', '😘', '😗', '😚', '😙', '🥰', '😋', '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😏', '😒', '🙄', '😬', '🤥', '😔', '😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '🤯', '🤠', '🥳', '😎', '🤓', '🧐'],
+  animals: ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐽', '🐸', '🐵', '🙈', '🙉', '🙊', '🐒', '🐔', '🐧', '🐦', '🐤', '🐣', '🐥', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐞', '🐜', '🦟', '🦗', '🕷', '🕸', '🦂', '🐢', '🐍', '🦎', '🦖', '🦕'],
+  food: ['🍎', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝', '🍅', '🍆', '🥑', '🥦', '🥒', '🌶', '🌽', '🥕', '🥔', '🍠', '🥐', '🍞', '🥖', '🥨', '🧀', '🥚', '🍳', '🥞', '🥓', '🥩', '🍗', '🍖', '🌭', '🍔', '🍟', '🍕', '🥪', '🥙', '🌮', '🌯', '🥗', '🥘', '🥫', '🍝', '🍜', '🍲'],
+  activities: ['⚽', '🏀', '🏈', '⚾', '🥎', '🎾', '🏐', '🏉', '🥏', '🎱', '🪀', '🏓', '🏸', '🏒', '🏑', '🥍', '🏏', '🥅', '⛳', '🪁', '🏹', '🎣', '🤿', '🥊', '🥋', '🎽', '🛹', '🛷', '⛸', '🥌', '🎿', '⛷', '🏂', '🪂', '🏋', '🤸', '🤺', '🤾', '🏌', '🏇', '🧘', '🏄', '🏊', '🤽', '🚣', '🧗', '🚵', '🚴', '🏆', '🥇', '🥈'],
+  objects: ['⌚', '📱', '📲', '💻', '⌨', '🖥', '🖨', '🖱', '🖲', '🕹', '🗜', '💽', '💾', '💿', '📀', '📼', '📷', '📸', '📹', '🎥', '📽', '🎞', '📞', '☎', '📟', '📠', '📺', '📻', '🎙', '🎚', '🎛', '🧭', '⏱', '⏲', '⏰', '🕰', '⌛', '⏳', '📡', '🔋', '🔌', '💡', '🔦', '🕯', '🪔', '🧯', '🛢', '💸', '💵', '💴', '💶'],
+  symbols: ['❤', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎', '💔', '❣', '💕', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '☮', '✝', '☪', '🕉', '☸', '✡', '🔯', '🕎', '☯', '☦', '🛐', '⛎', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓', '🆔', '⚛', '🉑', '☢', '☣', '📴', '📳', '🈶']
+};
+
 const CreatePostForm = ({ onSubmit, currentUser }) => {
-const [content, setContent] = useState("");
+  const [content, setContent] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [suggestedHashtags, setSuggestedHashtags] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-
-  useEffect(() => {
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('smileys');
+  const emojiPickerRef = useRef(null);
+  const textareaRef = useRef(null);
+useEffect(() => {
     if (content.trim()) {
       const suggestions = hashtagService.suggestHashtags(content);
       setSuggestedHashtags(suggestions);
@@ -24,6 +37,22 @@ const [content, setContent] = useState("");
       setShowSuggestions(false);
     }
   }, [content]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target)) {
+        setShowEmojiPicker(false);
+      }
+    };
+
+    if (showEmojiPicker) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showEmojiPicker]);
   const handleMediaUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -51,6 +80,25 @@ const handleHashtagClick = (hashtag) => {
     setShowSuggestions(false);
   };
 
+  const handleEmojiClick = (emoji) => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const newContent = content.substring(0, start) + emoji + content.substring(end);
+      setContent(newContent);
+      
+      // Set cursor position after the emoji
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(start + emoji.length, start + emoji.length);
+      }, 0);
+    } else {
+      // Fallback: append to end
+      setContent(prev => prev + emoji);
+    }
+    setShowEmojiPicker(false);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -112,7 +160,8 @@ const handleHashtagClick = (hashtag) => {
         />
         
         <div className="flex-1 space-y-4">
-          <Textarea
+<Textarea
+            ref={textareaRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="What's happening?"
@@ -157,14 +206,57 @@ const handleHashtagClick = (hashtag) => {
                 <ApperIcon name="BarChart3" size={20} />
               </button>
               
-              <button
-                type="button"
-                className="text-primary hover:text-secondary"
-                onClick={() => toast.info("Emoji picker coming soon!")}
-              >
-                <ApperIcon name="Smile" size={20} />
-              </button>
-</div>
+<div className="relative">
+                <button
+                  type="button"
+                  className="text-primary hover:text-secondary"
+                  onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                >
+                  <ApperIcon name="Smile" size={20} />
+                </button>
+                
+                {showEmojiPicker && (
+                  <div 
+                    ref={emojiPickerRef}
+                    className="absolute top-full left-0 mt-2 w-80 bg-surface border border-gray-700 rounded-lg shadow-lg z-50 overflow-hidden"
+                  >
+                    {/* Category tabs */}
+                    <div className="flex border-b border-gray-700 bg-gray-800">
+                      {Object.keys(EMOJI_CATEGORIES).map((category) => (
+                        <button
+                          key={category}
+                          type="button"
+                          onClick={() => setActiveCategory(category)}
+                          className={`flex-1 py-2 px-3 text-sm capitalize transition-colors ${
+                            activeCategory === category
+                              ? 'text-primary bg-primary/20'
+                              : 'text-gray-400 hover:text-gray-300'
+                          }`}
+                        >
+                          {category}
+                        </button>
+                      ))}
+                    </div>
+                    
+                    {/* Emoji grid */}
+                    <div className="p-3 max-h-64 overflow-y-auto">
+                      <div className="grid grid-cols-8 gap-1">
+                        {EMOJI_CATEGORIES[activeCategory].map((emoji, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => handleEmojiClick(emoji)}
+                            className="w-8 h-8 text-xl hover:bg-gray-700 rounded transition-colors flex items-center justify-center"
+                          >
+                            {emoji}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
             
             <div className="flex items-center space-x-4">
               <span className={`text-sm ${remainingChars < 20 ? "text-warning" : "text-gray-400"}`}>

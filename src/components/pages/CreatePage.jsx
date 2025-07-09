@@ -10,9 +10,9 @@ const CreatePage = ({ currentUser }) => {
   const handleCreatePost = async (postData) => {
     setIsCreating(true);
     try {
-      const newPost = await postsService.create({
+const newPost = await postsService.create({
         ...postData,
-        userId: currentUser.Id
+        user_id: currentUser.Id
       });
       
       toast.success('Post created successfully!');

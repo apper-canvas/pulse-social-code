@@ -11,14 +11,14 @@ import { toast } from "react-toastify";
 const SettingsPage = ({ currentUser, onUpdateUser }) => {
   const { tab } = useParams();
   const [activeTab, setActiveTab] = useState(tab || "profile");
-  const [profileData, setProfileData] = useState({
-    displayName: currentUser.displayName,
+const [profileData, setProfileData] = useState({
+    displayName: currentUser.display_name || currentUser.displayName,
     username: currentUser.username,
     bio: currentUser.bio || "",
     avatar: currentUser.avatar,
   });
   const [privacySettings, setPrivacySettings] = useState({
-    isPrivate: currentUser.isPrivate || false,
+isPrivate: currentUser.is_private || currentUser.isPrivate || false,
     allowMessages: true,
     allowTagging: true,
     showActivity: true,
@@ -84,7 +84,7 @@ const [isUpdating, setIsUpdating] = useState(false);
         return (
           <form onSubmit={handleUpdateProfile} className="space-y-6">
             <div className="flex items-center space-x-6">
-              <Avatar src={profileData.avatar} alt={profileData.displayName} size="xl" />
+<Avatar src={profileData.avatar} alt={profileData.displayName || profileData.display_name} size="xl" />
               <div>
                 <Button variant="secondary" type="button">
                   <ApperIcon name="Upload" size={16} className="mr-2" />

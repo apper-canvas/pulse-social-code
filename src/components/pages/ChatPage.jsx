@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
+import { toast } from "react-toastify";
 import ApperIcon from "@/components/ApperIcon";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
-import { chatService } from "@/services/api/chatService";
-import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
-import { toast } from "react-toastify";
+import Loading from "@/components/ui/Loading";
+import { chatService } from "@/services/api/chatService";
 
 const ChatPage = ({ currentUser }) => {
   const [chats, setChats] = useState([]);
@@ -51,7 +51,7 @@ const ChatPage = ({ currentUser }) => {
   };
 
   const loadMessages = async (chatId) => {
-    try {
+try {
       const messageData = await chatService.getMessages(chatId);
       setMessages(messageData);
       // Mark messages as read
@@ -73,7 +73,7 @@ const ChatPage = ({ currentUser }) => {
     setNewMessage("");
     setSendingMessage(true);
 
-    try {
+try {
       const messageData = {
         chatId: selectedChat.Id,
         senderId: currentUser.Id,
@@ -87,10 +87,13 @@ const ChatPage = ({ currentUser }) => {
       // Update chat list with new last message
       setChats(prev => prev.map(chat => 
         chat.Id === selectedChat.Id 
-          ? { 
+? { 
               ...chat, 
+              last_message: messageText,
               lastMessage: messageText,
+              last_message_at: new Date().toISOString(),
               lastMessageAt: new Date().toISOString(),
+              unread_count: 0,
               unreadCount: 0
             }
           : chat
@@ -163,20 +166,20 @@ const ChatPage = ({ currentUser }) => {
                       <p className="font-medium text-white truncate">
                         {otherParticipant.displayName}
                       </p>
-                      {chat.lastMessageAt && (
+{(chat.last_message_at || chat.lastMessageAt) && (
                         <span className="text-xs text-gray-400">
-                          {formatDistanceToNow(new Date(chat.lastMessageAt), { addSuffix: true })}
+                          {formatDistanceToNow(new Date(chat.last_message_at || chat.lastMessageAt), { addSuffix: true })}
                         </span>
                       )}
                     </div>
                     
                     <div className="flex items-center justify-between mt-1">
-                      <p className="text-sm text-gray-400 truncate">
-                        {chat.lastMessage || "No messages yet"}
+<p className="text-sm text-gray-400 truncate">
+                        {chat.last_message || chat.lastMessage || "No messages yet"}
                       </p>
-                      {chat.unreadCount > 0 && (
+{(chat.unread_count || chat.unreadCount) > 0 && (
                         <span className="bg-primary text-white text-xs rounded-full px-2 py-1 min-w-[20px] text-center">
-                          {chat.unreadCount}
+                          {chat.unread_count || chat.unreadCount}
                         </span>
                       )}
                     </div>
@@ -231,8 +234,8 @@ const ChatPage = ({ currentUser }) => {
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.map((message) => {
-                const isOwnMessage = message.senderId === currentUser.Id;
+{messages.map((message) => {
+                const isOwnMessage = (message.sender_id || message.senderId) === currentUser.Id;
                 const sender = isOwnMessage 
                   ? currentUser 
                   : getOtherParticipant(selectedChat);
@@ -248,9 +251,9 @@ const ChatPage = ({ currentUser }) => {
                     <div className={`flex items-end space-x-2 max-w-xs lg:max-w-md ${
                       isOwnMessage ? "flex-row-reverse space-x-reverse" : ""
                     }`}>
-                      <Avatar 
+<Avatar 
                         src={sender.avatar} 
-                        alt={sender.displayName}
+                        alt={sender.display_name || sender.displayName}
                         size="sm"
                       />
                       
@@ -259,11 +262,11 @@ const ChatPage = ({ currentUser }) => {
                           ? "bg-primary text-white rounded-br-md"
                           : "bg-gray-700 text-white rounded-bl-md"
                       }`}>
-                        <p className="text-sm">{message.content}</p>
+<p className="text-sm">{message.content}</p>
                         <p className={`text-xs mt-1 ${
                           isOwnMessage ? "text-primary-100" : "text-gray-400"
                         }`}>
-                          {formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })}
+                          {formatDistanceToNow(new Date(message.created_at || message.createdAt), { addSuffix: true })}
                         </p>
                       </div>
                     </div>

@@ -66,11 +66,11 @@ const handleLike = async (postId, isLiked) => {
     // Handle post sharing
     console.log("Share post:", postId);
   };
-
-  const getUserById = (userId) => {
+const getUserById = (userId) => {
     return users.find(user => user.Id === userId) || {
       Id: userId,
       username: "unknown",
+      display_name: "Unknown User",
       displayName: "Unknown User",
       avatar: null
     };
@@ -90,8 +90,8 @@ const handleLike = async (postId, isLiked) => {
 
   return (
     <div className="space-y-6">
-      {posts.map((post) => {
-        const user = getUserById(post.userId);
+{posts.map((post) => {
+        const user = getUserById(post.user_id || post.userId);
         return (
           <motion.div
             key={post.Id}

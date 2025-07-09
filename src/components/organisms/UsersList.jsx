@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import UserCard from "@/components/molecules/UserCard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import { usersService } from "@/services/api/usersService";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import UserCard from "@/components/molecules/UserCard";
 import { followsService } from "@/services/api/followsService";
+import { usersService } from "@/services/api/usersService";
 
 const UsersList = ({ searchQuery = "", variant = "suggestions" }) => {
   const [users, setUsers] = useState([]);
@@ -27,8 +27,8 @@ const loadUsers = async () => {
       
       if (searchQuery) {
         filteredUsers = usersData.filter(user => 
-          user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+          (user.username && user.username.toLowerCase().includes(searchQuery.toLowerCase())) ||
+          ((user.display_name || user.displayName) && (user.display_name || user.displayName).toLowerCase().includes(searchQuery.toLowerCase()))
         );
       } else if (variant === "suggestions") {
         // For friend suggestions, calculate mutual connections and sort by them
@@ -38,7 +38,7 @@ const loadUsers = async () => {
         const unfollowedUsers = usersData.filter(user => 
           user.Id !== currentUserId && 
           !followsData.some(follow => 
-            follow.followerId === currentUserId && follow.followingId === user.Id
+            follow.follower_id === currentUserId && follow.following_id === user.Id
           )
         );
         
@@ -72,28 +72,27 @@ const loadUsers = async () => {
     loadUsers();
   }, [searchQuery]);
 
-  const handleFollow = async (userId) => {
+const handleFollow = async (userId) => {
     try {
       await followsService.follow(userId);
-      setFollows(prev => [...prev, { followerId: 1, followingId: userId }]);
+      setFollows(prev => [...prev, { follower_id: 1, following_id: userId }]);
     } catch (err) {
       console.error("Failed to follow user:", err);
     }
   };
 
-  const handleUnfollow = async (userId) => {
+const handleUnfollow = async (userId) => {
     try {
       await followsService.unfollow(userId);
-      setFollows(prev => prev.filter(follow => follow.followingId !== userId));
+      setFollows(prev => prev.filter(follow => follow.following_id !== userId));
     } catch (err) {
       console.error("Failed to unfollow user:", err);
     }
   };
 
-  const isFollowing = (userId) => {
-    return follows.some(follow => follow.followingId === userId);
+const isFollowing = (userId) => {
+    return follows.some(follow => follow.following_id === userId);
   };
-
   if (loading) {
     return <Loading variant="users" />;
   }

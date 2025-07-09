@@ -1,16 +1,23 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
-import Badge from "@/components/atoms/Badge";
-import PostCard from "@/components/molecules/PostCard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import ApperIcon from "@/components/ApperIcon";
-import { postsService } from "@/services/api/postsService";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import PostCard from "@/components/molecules/PostCard";
+import notifications from "@/services/mockData/notifications.json";
+import comments from "@/services/mockData/comments.json";
+import posts from "@/services/mockData/posts.json";
+import messages from "@/services/mockData/messages.json";
+import users from "@/services/mockData/users.json";
+import follows from "@/services/mockData/follows.json";
+import chats from "@/services/mockData/chats.json";
 import { usersService } from "@/services/api/usersService";
+import { postsService } from "@/services/api/postsService";
 
 const ProfilePage = ({ currentUser }) => {
   const navigate = useNavigate();
@@ -115,13 +122,13 @@ const ProfilePage = ({ currentUser }) => {
                   )}
                 </div>
                 
-                <div className="flex justify-center md:justify-start space-x-8">
+<div className="flex justify-center md:justify-start space-x-8">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white">{posts.length}</div>
+                    <div className="text-2xl font-bold text-white">{currentUser.posts_count || currentUser.postsCount || posts.length}</div>
                     <div className="text-gray-400 text-sm">Posts</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-white">1.2K</div>
+                    <div className="text-2xl font-bold text-white">{currentUser.followers_count || currentUser.followersCount || "1.2K"}</div>
                     <div className="text-gray-400 text-sm">Followers</div>
                   </div>
                   <div className="text-center">
@@ -131,7 +138,7 @@ const ProfilePage = ({ currentUser }) => {
                 </div>
               </div>
               
-<div className="flex space-x-3">
+              <div className="flex space-x-3">
                 <Button 
                   variant="primary"
                   onClick={() => navigate("/settings/profile")}
@@ -190,11 +197,10 @@ const ProfilePage = ({ currentUser }) => {
                 )}
               </>
             )}
-            
-            {activeTab === "media" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+{activeTab === "media" && (
+              <div className="grid grid-cols-3 gap-4">
                 {posts
-                  .filter(post => post.mediaUrl)
+                  .filter(post => post.media_url || post.mediaUrl)
                   .map((post) => (
                     <motion.div
                       key={post.Id}
@@ -202,14 +208,14 @@ const ProfilePage = ({ currentUser }) => {
                       className="aspect-square bg-surface rounded-lg overflow-hidden cursor-pointer"
                     >
                       <img
-                        src={post.mediaUrl}
+                        src={post.media_url || post.mediaUrl}
                         alt="Post media"
                         className="w-full h-full object-cover"
                       />
                     </motion.div>
                   ))
                 }
-                {posts.filter(post => post.mediaUrl).length === 0 && (
+                {posts.filter(post => post.media_url || post.mediaUrl).length === 0 && (
                   <div className="col-span-full">
                     <Empty 
                       variant="posts"

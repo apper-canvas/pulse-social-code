@@ -10,9 +10,9 @@ const HomePage = ({ currentUser }) => {
 
   const handleCreatePost = async (postData) => {
     try {
-      await postsService.create({
+await postsService.create({
         ...postData,
-        userId: currentUser.Id,
+        user_id: currentUser.Id,
         createdAt: new Date().toISOString(),
       });
       

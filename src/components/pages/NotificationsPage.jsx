@@ -39,19 +39,19 @@ const NotificationsPage = () => {
 
 const handleNotificationClick = async (notification) => {
     try {
-      // Mark as read first
+// Mark as read first
       await notificationsService.markAsRead(notification.Id);
       setNotifications(prev => 
         prev.map(n => 
           n.Id === notification.Id 
-            ? { ...n, isRead: true }
+            ? { ...n, is_read: true, isRead: true }
             : n
         )
       );
 
-      // Navigate to appropriate existing routes
-      if (notification.actionUrl) {
-        navigate(notification.actionUrl);
+// Navigate to appropriate existing routes
+      if (notification.action_url || notification.actionUrl) {
+        navigate(notification.action_url || notification.actionUrl);
       } else {
         // Fallback navigation to existing routes only
         switch (notification.type) {
@@ -79,9 +79,9 @@ const handleNotificationClick = async (notification) => {
 
   const handleMarkAllAsRead = async () => {
     try {
-      await notificationsService.markAllAsRead();
+await notificationsService.markAllAsRead();
       setNotifications(prev => 
-        prev.map(notification => ({ ...notification, isRead: true }))
+        prev.map(notification => ({ ...notification, is_read: true, isRead: true }))
       );
     } catch (err) {
       console.error("Failed to mark all as read:", err);
@@ -118,9 +118,9 @@ const handleNotificationClick = async (notification) => {
     }
   };
 
-  const filteredNotifications = notifications.filter(notification => {
+const filteredNotifications = notifications.filter(notification => {
     if (filter === "all") return true;
-    if (filter === "unread") return !notification.isRead;
+    if (filter === "unread") return !(notification.is_read || notification.isRead);
     return notification.type === filter;
   });
 
@@ -155,7 +155,7 @@ const handleNotificationClick = async (notification) => {
               <p className="text-gray-400 mt-2">Stay updated with your activity</p>
             </div>
             
-            {notifications.some(n => !n.isRead) && (
+{notifications.some(n => !(n.is_read || n.isRead)) && (
               <Button variant="primary" onClick={handleMarkAllAsRead}>
                 <ApperIcon name="CheckCheck" size={16} className="mr-2" />
                 Mark all as read
@@ -197,16 +197,16 @@ const handleNotificationClick = async (notification) => {
                   key={notification.Id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className={`bg-surface rounded-xl p-6 border transition-all duration-200 cursor-pointer ${
-                    notification.isRead 
+className={`bg-surface rounded-xl p-6 border transition-all duration-200 cursor-pointer ${
+                    (notification.is_read || notification.isRead)
                       ? "border-gray-700 hover:border-gray-600" 
                       : "border-primary/50 bg-primary/5"
                   }`}
 onClick={() => handleNotificationClick(notification)}
                 >
                   <div className="flex items-start space-x-4">
-                    <div className={`p-2 rounded-full ${
-                      notification.isRead ? "bg-gray-800" : "bg-primary/20"
+<div className={`p-2 rounded-full ${
+                      (notification.is_read || notification.isRead) ? "bg-gray-800" : "bg-primary/20"
                     }`}>
                       <ApperIcon 
                         name={getNotificationIcon(notification.type)} 
@@ -217,18 +217,18 @@ onClick={() => handleNotificationClick(notification)}
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-2 mb-1">
-                        <Avatar 
-                          src={notification.userAvatar} 
-                          alt={notification.userName} 
+<Avatar 
+                          src={notification.user_avatar || notification.userAvatar} 
+                          alt={notification.user_name || notification.userName}
                           size="sm" 
                         />
-                        <span className="font-medium text-white">
-                          {notification.userName}
+<span className="font-medium text-white">
+                          {notification.user_name || notification.userName}
                         </span>
                         <span className="text-gray-400 text-sm">
                           {notification.action}
                         </span>
-                        {!notification.isRead && (
+{!(notification.is_read || notification.isRead) && (
                           <Badge variant="primary" size="sm">New</Badge>
                         )}
                       </div>
@@ -238,11 +238,11 @@ onClick={() => handleNotificationClick(notification)}
                       </p>
                       
                       <div className="flex items-center justify-between">
-                        <span className="text-gray-400 text-sm">
-                          {formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
+<span className="text-gray-400 text-sm">
+                          {formatDistanceToNow(new Date(notification.created_at || notification.createdAt), { addSuffix: true })}
                         </span>
                         
-                        {notification.actionUrl && (
+{(notification.action_url || notification.actionUrl) && (
                           <Button variant="ghost" size="sm">
                             View
                           </Button>

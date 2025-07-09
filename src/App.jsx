@@ -7,6 +7,7 @@ import ProfilePage from "@/components/pages/ProfilePage";
 import NotificationsPage from "@/components/pages/NotificationsPage";
 import SettingsPage from "@/components/pages/SettingsPage";
 import ChatPage from "@/components/pages/ChatPage";
+import CreatePage from "@/components/pages/CreatePage";
 import { usersService } from "@/services/api/usersService";
 import { NotificationProvider, useNotifications } from "@/context/NotificationContext";
 import { toast } from "react-toastify";
@@ -72,6 +73,7 @@ const AppContent = () => {
 <Routes>
           <Route path="/" element={<HomePage currentUser={currentUser} />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/create" element={<CreatePage currentUser={currentUser} />} />
           <Route path="/profile" element={<ProfilePage currentUser={currentUser} />} />
 <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/messages" element={<ChatPage currentUser={currentUser} />} />

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
@@ -12,6 +13,7 @@ import { postsService } from "@/services/api/postsService";
 import { usersService } from "@/services/api/usersService";
 
 const ProfilePage = ({ currentUser }) => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -129,8 +131,11 @@ const ProfilePage = ({ currentUser }) => {
                 </div>
               </div>
               
-              <div className="flex space-x-3">
-                <Button variant="primary">
+<div className="flex space-x-3">
+                <Button 
+                  variant="primary"
+                  onClick={() => navigate("/settings/profile")}
+                >
                   <ApperIcon name="Edit" size={16} className="mr-2" />
                   Edit Profile
                 </Button>

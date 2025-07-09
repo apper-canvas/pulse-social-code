@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
@@ -8,7 +9,8 @@ import ApperIcon from "@/components/ApperIcon";
 import { toast } from "react-toastify";
 
 const SettingsPage = ({ currentUser, onUpdateUser }) => {
-  const [activeTab, setActiveTab] = useState("profile");
+  const { tab } = useParams();
+  const [activeTab, setActiveTab] = useState(tab || "profile");
   const [profileData, setProfileData] = useState({
     displayName: currentUser.displayName,
     username: currentUser.username,
@@ -21,7 +23,13 @@ const SettingsPage = ({ currentUser, onUpdateUser }) => {
     allowTagging: true,
     showActivity: true,
   });
-  const [isUpdating, setIsUpdating] = useState(false);
+const [isUpdating, setIsUpdating] = useState(false);
+
+  useEffect(() => {
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [tab]);
 
   const tabs = [
     { id: "profile", label: "Profile", icon: "User" },

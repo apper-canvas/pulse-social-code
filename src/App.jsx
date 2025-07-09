@@ -73,9 +73,10 @@ const AppContent = () => {
           <Route path="/" element={<HomePage currentUser={currentUser} />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/profile" element={<ProfilePage currentUser={currentUser} />} />
-          <Route path="/notifications" element={<NotificationsPage />} />
+<Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/messages" element={<ChatPage currentUser={currentUser} />} />
           <Route path="/settings" element={<SettingsPage currentUser={currentUser} onUpdateUser={handleUpdateUser} />} />
+          <Route path="/settings/:tab" element={<SettingsPage currentUser={currentUser} onUpdateUser={handleUpdateUser} />} />
         </Routes>
       </main>
     </div>

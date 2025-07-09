@@ -3,13 +3,22 @@ import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 import ApperIcon from "@/components/ApperIcon";
-
+import { useNotifications } from "@/context/NotificationContext";
 const UserCard = ({ user, onFollow, onUnfollow, isFollowing = false }) => {
-  const handleFollowClick = () => {
+  const { createNotification } = useNotifications();
+  
+  const handleFollowClick = async () => {
     if (isFollowing) {
       onUnfollow(user.Id);
     } else {
       onFollow(user.Id);
+      
+      // Create notification for the user being followed
+      try {
+        await createNotification("follow", 1, user.Id);
+      } catch (error) {
+        console.error("Failed to create follow notification:", error);
+      }
     }
   };
 

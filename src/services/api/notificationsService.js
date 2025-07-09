@@ -67,10 +67,42 @@ class NotificationsService {
     this.notifications.splice(index, 1);
     return true;
   }
-
-  async getUnreadCount() {
+async getUnreadCount() {
     await this.delay();
     return this.notifications.filter(n => !n.isRead).length;
+  }
+
+  async createPushNotification(notification) {
+    await this.delay(100);
+    
+    if (typeof Notification === "undefined" || Notification.permission !== "granted") {
+      return false;
+    }
+
+    try {
+      const title = "Pulse";
+      const options = {
+        body: notification.message,
+        icon: "/favicon.ico",
+        badge: "/favicon.ico",
+        tag: `notification-${notification.Id}`,
+        timestamp: new Date(notification.createdAt).getTime(),
+        requireInteraction: false,
+        silent: false,
+      };
+
+      const pushNotification = new Notification(title, options);
+      
+      // Auto close after 5 seconds
+      setTimeout(() => {
+        pushNotification.close();
+      }, 5000);
+
+      return true;
+    } catch (error) {
+      console.error("Failed to create push notification:", error);
+      return false;
+    }
   }
 }
 

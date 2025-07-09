@@ -5,11 +5,11 @@ import ApperIcon from "@/components/ApperIcon";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import SearchBar from "@/components/molecules/SearchBar";
-
+import { useNotifications } from "@/context/NotificationContext";
 const Header = ({ currentUser, onSearch, searchResults = [] }) => {
   const location = useLocation();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
+  const { unreadCount } = useNotifications();
   const navigation = [
     { name: "Home", path: "/", icon: "Home" },
     { name: "Explore", path: "/explore", icon: "Compass" },
@@ -55,11 +55,23 @@ const Header = ({ currentUser, onSearch, searchResults = [] }) => {
             <SearchBar onSearch={onSearch} results={searchResults} />
           </div>
 
-          {/* Profile Menu */}
+{/* Profile Menu */}
           <div className="flex items-center space-x-4">
             <Button variant="ghost" size="sm" className="lg:hidden">
               <ApperIcon name="Search" size={20} />
             </Button>
+            
+            {/* Notification Bell with Badge */}
+            <Link to="/notifications" className="relative">
+              <Button variant="ghost" size="sm">
+                <ApperIcon name="Bell" size={20} />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                    {unreadCount > 99 ? "99+" : unreadCount}
+                  </span>
+                )}
+              </Button>
+            </Link>
             
             <Link to="/profile" className="flex items-center space-x-2">
               <Avatar 

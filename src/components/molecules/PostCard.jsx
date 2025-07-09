@@ -5,7 +5,7 @@ import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 import { toast } from "react-toastify";
-
+import { useNotifications } from "@/context/NotificationContext";
 const PostCard = ({ 
   post, 
   user, 
@@ -18,8 +18,8 @@ const PostCard = ({
   const [liked, setLiked] = useState(isLiked);
   const [likeCount, setLikeCount] = useState(post.likes || 0);
   const [showFullContent, setShowFullContent] = useState(false);
-
-  const handleLike = () => {
+  const { createNotification } = useNotifications();
+const handleLike = async () => {
     const newLikedState = !liked;
     setLiked(newLikedState);
     setLikeCount(prev => newLikedState ? prev + 1 : prev - 1);
@@ -30,6 +30,15 @@ const PostCard = ({
     
     if (newLikedState) {
       toast.success("Post liked!", { autoClose: 1000 });
+      
+      // Create notification for the post author (if not liking own post)
+      if (post.userId !== 1) { // Assuming current user Id is 1
+        try {
+          await createNotification("like", 1, post.userId, post.Id);
+        } catch (error) {
+          console.error("Failed to create like notification:", error);
+        }
+      }
     }
   };
 

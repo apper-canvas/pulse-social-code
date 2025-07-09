@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/organisms/Header";
 import HomePage from "@/components/pages/HomePage";
 import ExplorePage from "@/components/pages/ExplorePage";
@@ -7,9 +7,12 @@ import ProfilePage from "@/components/pages/ProfilePage";
 import NotificationsPage from "@/components/pages/NotificationsPage";
 import SettingsPage from "@/components/pages/SettingsPage";
 import { usersService } from "@/services/api/usersService";
+import { NotificationProvider, useNotifications } from "@/context/NotificationContext";
+import { toast } from "react-toastify";
 
-function App() {
-  // Mock current user - in a real app, this would come from auth context
+const AppContent = () => {
+  const { requestNotificationPermission } = useNotifications();
+// Mock current user - in a real app, this would come from auth context
   const [currentUser, setCurrentUser] = useState({
     Id: 1,
     username: "alexchen",
@@ -23,6 +26,19 @@ function App() {
   });
 
   const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    // Request notification permission on app load
+    const initializeNotifications = async () => {
+      try {
+        await requestNotificationPermission();
+      } catch (error) {
+        console.error("Failed to initialize notifications:", error);
+      }
+    };
+
+    initializeNotifications();
+  }, [requestNotificationPermission]);
 
   const handleSearch = async (query) => {
     try {
@@ -61,6 +77,14 @@ function App() {
         </Routes>
       </main>
     </div>
+);
+};
+
+function App() {
+  return (
+    <NotificationProvider>
+      <AppContent />
+    </NotificationProvider>
   );
 }
 

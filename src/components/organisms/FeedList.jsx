@@ -36,7 +36,7 @@ const FeedList = ({ refreshTrigger = 0 }) => {
     loadFeed();
   }, [refreshTrigger]);
 
-  const handleLike = async (postId, isLiked) => {
+const handleLike = async (postId, isLiked) => {
     try {
       await postsService.toggleLike(postId, isLiked);
       setPosts(prevPosts => 

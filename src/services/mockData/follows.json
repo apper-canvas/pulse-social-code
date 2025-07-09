@@ -1,0 +1,117 @@
+[
+  {
+    "followerId": 1,
+    "followingId": 2,
+    "createdAt": "2024-01-10T09:15:00Z"
+  },
+  {
+    "followerId": 1,
+    "followingId": 3,
+    "createdAt": "2024-01-12T14:30:00Z"
+  },
+  {
+    "followerId": 1,
+    "followingId": 4,
+    "createdAt": "2024-01-08T11:20:00Z"
+  },
+  {
+    "followerId": 2,
+    "followingId": 1,
+    "createdAt": "2024-01-11T16:45:00Z"
+  },
+  {
+    "followerId": 2,
+    "followingId": 3,
+    "createdAt": "2024-01-09T08:30:00Z"
+  },
+  {
+    "followerId": 2,
+    "followingId": 5,
+    "createdAt": "2024-01-13T12:00:00Z"
+  },
+  {
+    "followerId": 3,
+    "followingId": 1,
+    "createdAt": "2024-01-07T10:15:00Z"
+  },
+  {
+    "followerId": 3,
+    "followingId": 4,
+    "createdAt": "2024-01-14T15:20:00Z"
+  },
+  {
+    "followerId": 3,
+    "followingId": 6,
+    "createdAt": "2024-01-06T13:40:00Z"
+  },
+  {
+    "followerId": 4,
+    "followingId": 1,
+    "createdAt": "2024-01-05T17:25:00Z"
+  },
+  {
+    "followerId": 4,
+    "followingId": 2,
+    "createdAt": "2024-01-08T19:10:00Z"
+  },
+  {
+    "followerId": 4,
+    "followingId": 7,
+    "createdAt": "2024-01-12T07:50:00Z"
+  },
+  {
+    "followerId": 5,
+    "followingId": 1,
+    "createdAt": "2024-01-09T14:35:00Z"
+  },
+  {
+    "followerId": 5,
+    "followingId": 3,
+    "createdAt": "2024-01-11T11:20:00Z"
+  },
+  {
+    "followerId": 5,
+    "followingId": 8,
+    "createdAt": "2024-01-10T16:00:00Z"
+  },
+  {
+    "followerId": 6,
+    "followingId": 2,
+    "createdAt": "2024-01-13T09:45:00Z"
+  },
+  {
+    "followerId": 6,
+    "followingId": 4,
+    "createdAt": "2024-01-07T12:30:00Z"
+  },
+  {
+    "followerId": 6,
+    "followingId": 5,
+    "createdAt": "2024-01-14T18:15:00Z"
+  },
+  {
+    "followerId": 7,
+    "followingId": 1,
+    "createdAt": "2024-01-06T08:20:00Z"
+  },
+  {
+    "followerId": 7,
+    "followingId": 6,
+    "createdAt": "2024-01-12T13:55:00Z"
+  },
+  {
+    "followerId": 8,
+    "followingId": 2,
+    "createdAt": "2024-01-08T15:40:00Z"
+  },
+  {
+    "followerId": 8,
+    "followingId": 5,
+    "createdAt": "2024-01-10T10:25:00Z"
+  },
+  {
+    "followerId": 8,
+    "followingId": 7,
+    "createdAt": "2024-01-11T17:30:00Z"
+  }
+]

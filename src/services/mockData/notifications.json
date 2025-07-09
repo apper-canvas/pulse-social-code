@@ -1,0 +1,98 @@
+[
+  {
+    "Id": 1,
+    "userId": 1,
+    "type": "like",
+    "userName": "Sarah Wilson",
+    "userAvatar": "https://images.unsplash.com/photo-1494790108755-2616b25c2369?w=150&h=150&fit=crop&crop=face",
+    "action": "liked your post",
+    "message": "Your post about React hooks received a lot of engagement!",
+    "actionUrl": "/posts/1",
+    "isRead": false,
+    "createdAt": "2024-01-15T11:30:00Z"
+  },
+  {
+    "Id": 2,
+    "userId": 1,
+    "type": "comment",
+    "userName": "Mike Johnson",
+    "userAvatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    "action": "commented on your post",
+    "message": "Great work on the hook! This will definitely improve our workflow.",
+    "actionUrl": "/posts/1",
+    "isRead": false,
+    "createdAt": "2024-01-15T11:20:00Z"
+  },
+  {
+    "Id": 3,
+    "userId": 1,
+    "type": "follow",
+    "userName": "Emily Davis",
+    "userAvatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    "action": "started following you",
+    "message": "You have a new follower! Check out their profile.",
+    "actionUrl": "/profile/4",
+    "isRead": true,
+    "createdAt": "2024-01-15T10:15:00Z"
+  },
+  {
+    "Id": 4,
+    "userId": 1,
+    "type": "like",
+    "userName": "David Brown",
+    "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    "action": "liked your post",
+    "message": "Your post about web development trends is gaining traction!",
+    "actionUrl": "/posts/9",
+    "isRead": true,
+    "createdAt": "2024-01-14T21:45:00Z"
+  },
+  {
+    "Id": 5,
+    "userId": 1,
+    "type": "mention",
+    "userName": "Jessica Lee",
+    "userAvatar": "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face",
+    "action": "mentioned you in a post",
+    "message": "You were mentioned in a discussion about digital marketing strategies.",
+    "actionUrl": "/posts/15",
+    "isRead": true,
+    "createdAt": "2024-01-14T18:30:00Z"
+  },
+  {
+    "Id": 6,
+    "userId": 1,
+    "type": "comment",
+    "userName": "Ryan Garcia",
+    "userAvatar": "https://images.unsplash.com/photo-1507081323647-4d250478b919?w=150&h=150&fit=crop&crop=face",
+    "action": "commented on your post",
+    "message": "WebAssembly is definitely the future! Excited to see what's next.",
+    "actionUrl": "/posts/9",
+    "isRead": true,
+    "createdAt": "2024-01-13T21:10:00Z"
+  },
+  {
+    "Id": 7,
+    "userId": 1,
+    "type": "like",
+    "userName": "Amanda White",
+    "userAvatar": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+    "action": "liked your comment",
+    "message": "Your comment on the Tokyo travel post received appreciation.",
+    "actionUrl": "/posts/8",
+    "isRead": true,
+    "createdAt": "2024-01-13T23:50:00Z"
+  },
+  {
+    "Id": 8,
+    "userId": 1,
+    "type": "follow",
+    "userName": "Alex Martinez",
+    "userAvatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    "action": "started following you",
+    "message": "A new developer joined your network!",
+    "actionUrl": "/profile/9",
+    "isRead": true,
+    "createdAt": "2024-01-13T16:20:00Z"
+  }
+]

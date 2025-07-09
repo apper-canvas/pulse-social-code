@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "postId": 1,
+    "userId": 2,
+    "content": "This looks awesome! Can you share the code snippet?",
+    "likes": 12,
+    "createdAt": "2024-01-15T10:45:00Z"
+  },
+  {
+    "Id": 2,
+    "postId": 1,
+    "userId": 3,
+    "content": "Great work on the hook! This will definitely improve our workflow.",
+    "likes": 8,
+    "createdAt": "2024-01-15T11:20:00Z"
+  },
+  {
+    "Id": 3,
+    "postId": 2,
+    "userId": 1,
+    "content": "Love the color palette! The gradients are so smooth.",
+    "likes": 15,
+    "createdAt": "2024-01-15T08:30:00Z"
+  },
+  {
+    "Id": 4,
+    "postId": 2,
+    "userId": 4,
+    "content": "Design systems are game-changers for team productivity. Nice work!",
+    "likes": 9,
+    "createdAt": "2024-01-15T09:15:00Z"
+  },
+  {
+    "Id": 5,
+    "postId": 3,
+    "userId": 5,
+    "content": "Congratulations on the launch! User feedback is the best validation.",
+    "likes": 23,
+    "createdAt": "2024-01-14T16:45:00Z"
+  },
+  {
+    "Id": 6,
+    "postId": 4,
+    "userId": 6,
+    "content": "94% accuracy is impressive! What dataset did you use for training?",
+    "likes": 18,
+    "createdAt": "2024-01-14T15:20:00Z"
+  },
+  {
+    "Id": 7,
+    "postId": 7,
+    "userId": 8,
+    "content": "So motivating! Starting my fitness journey this month.",
+    "likes": 31,
+    "createdAt": "2024-01-14T07:30:00Z"
+  },
+  {
+    "Id": 8,
+    "postId": 8,
+    "userId": 1,
+    "content": "Tokyo is on my bucket list! The photos are incredible.",
+    "likes": 42,
+    "createdAt": "2024-01-13T23:45:00Z"
+  },
+  {
+    "Id": 9,
+    "postId": 8,
+    "userId": 7,
+    "content": "I was just in Asakusa last month! Did you try the street food?",
+    "likes": 14,
+    "createdAt": "2024-01-14T00:20:00Z"
+  },
+  {
+    "Id": 10,
+    "postId": 9,
+    "userId": 2,
+    "content": "WebAssembly is definitely the future! Excited to see what's next.",
+    "likes": 7,
+    "createdAt": "2024-01-13T21:10:00Z"
+  }
+]

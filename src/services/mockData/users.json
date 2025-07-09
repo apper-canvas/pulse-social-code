@@ -1,0 +1,90 @@
+[
+  {
+    "Id": 1,
+    "username": "alexchen",
+    "displayName": "Alex Chen",
+    "bio": "Full-stack developer passionate about React and Node.js. Building the future one line of code at a time.",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 1247,
+    "postsCount": 89,
+    "createdAt": "2023-01-15T08:30:00Z"
+  },
+  {
+    "Id": 2,
+    "username": "sarahwilson",
+    "displayName": "Sarah Wilson",
+    "bio": "UX Designer creating beautiful and intuitive experiences. Coffee lover ☕ and weekend photographer 📸",
+    "avatar": "https://images.unsplash.com/photo-1494790108755-2616b25c2369?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 892,
+    "postsCount": 156,
+    "createdAt": "2023-02-10T14:20:00Z"
+  },
+  {
+    "Id": 3,
+    "username": "mikejohnson",
+    "displayName": "Mike Johnson",
+    "bio": "Product Manager at TechCorp. Startup enthusiast and mentor. Always learning something new!",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 2103,
+    "postsCount": 203,
+    "createdAt": "2023-01-28T11:45:00Z"
+  },
+  {
+    "Id": 4,
+    "username": "emilydavis",
+    "displayName": "Emily Davis",
+    "bio": "Data Scientist exploring the intersection of AI and human behavior. PhD in Machine Learning 🤖",
+    "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": true,
+    "followersCount": 567,
+    "postsCount": 78,
+    "createdAt": "2023-03-05T16:10:00Z"
+  },
+  {
+    "Id": 5,
+    "username": "davidbrown",
+    "displayName": "David Brown",
+    "bio": "Software Architect building scalable systems. Open source contributor and tech speaker 🎤",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 1834,
+    "postsCount": 142,
+    "createdAt": "2023-02-22T09:15:00Z"
+  },
+  {
+    "Id": 6,
+    "username": "jessicalee",
+    "displayName": "Jessica Lee",
+    "bio": "Marketing Director with a passion for digital strategy. Helping brands tell their stories 📱",
+    "avatar": "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 1456,
+    "postsCount": 267,
+    "createdAt": "2023-01-20T13:30:00Z"
+  },
+  {
+    "Id": 7,
+    "username": "ryangarcia",
+    "displayName": "Ryan Garcia",
+    "bio": "Fitness trainer and nutrition coach. Helping people achieve their health goals 💪",
+    "avatar": "https://images.unsplash.com/photo-1507081323647-4d250478b919?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 3421,
+    "postsCount": 189,
+    "createdAt": "2023-03-12T10:00:00Z"
+  },
+  {
+    "Id": 8,
+    "username": "amandawhite",
+    "displayName": "Amanda White",
+    "bio": "Travel blogger exploring the world one city at a time. Currently in Tokyo 🗾",
+    "avatar": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+    "isPrivate": false,
+    "followersCount": 5678,
+    "postsCount": 412,
+    "createdAt": "2023-02-18T15:45:00Z"
+  }
+]

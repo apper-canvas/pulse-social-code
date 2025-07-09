@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "userId": 1,
+    "content": "Just finished implementing a new React hook for managing form state. The developer experience is so much smoother now! 🚀 #React #WebDev",
+    "mediaUrl": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 47,
+    "comments": 12,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "userId": 2,
+    "content": "Working on a new design system for our team. The consistency across all our products is going to be amazing! Here's a sneak peek at the color palette.",
+    "mediaUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 89,
+    "comments": 23,
+    "createdAt": "2024-01-15T08:15:00Z"
+  },
+  {
+    "Id": 3,
+    "userId": 3,
+    "content": "Product launches are intense but so rewarding! Our team just shipped a feature that users have been requesting for months. The feedback has been incredible so far.",
+    "mediaUrl": null,
+    "mediaType": null,
+    "likes": 156,
+    "comments": 34,
+    "createdAt": "2024-01-14T16:20:00Z"
+  },
+  {
+    "Id": 4,
+    "userId": 4,
+    "content": "Fascinating results from our latest ML model! We've achieved 94% accuracy in predicting user behavior patterns. The implications for personalization are huge.",
+    "mediaUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 203,
+    "comments": 67,
+    "createdAt": "2024-01-14T14:45:00Z"
+  },
+  {
+    "Id": 5,
+    "userId": 5,
+    "content": "Microservices architecture can be complex, but when done right, it's incredibly powerful. Just finished migrating our monolith to a distributed system.",
+    "mediaUrl": null,
+    "mediaType": null,
+    "likes": 78,
+    "comments": 19,
+    "createdAt": "2024-01-14T12:10:00Z"
+  },
+  {
+    "Id": 6,
+    "userId": 6,
+    "content": "Brand storytelling in the digital age is more important than ever. Here's how we're helping our clients connect with their audience through authentic narratives.",
+    "mediaUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 112,
+    "comments": 28,
+    "createdAt": "2024-01-14T09:30:00Z"
+  },
+  {
+    "Id": 7,
+    "userId": 7,
+    "content": "Morning workout complete! Remember, consistency beats intensity every time. Small daily actions lead to big results over time. 💪 #Fitness #Motivation",
+    "mediaUrl": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 267,
+    "comments": 45,
+    "createdAt": "2024-01-14T07:00:00Z"
+  },
+  {
+    "Id": 8,
+    "userId": 8,
+    "content": "Tokyo never fails to amaze me! The blend of traditional and modern culture is incredible. Currently exploring the historic Asakusa district.",
+    "mediaUrl": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 412,
+    "comments": 89,
+    "createdAt": "2024-01-13T23:15:00Z"
+  },
+  {
+    "Id": 9,
+    "userId": 1,
+    "content": "The future of web development is looking bright! WebAssembly, edge computing, and AI-powered development tools are changing everything.",
+    "mediaUrl": null,
+    "mediaType": null,
+    "likes": 94,
+    "comments": 31,
+    "createdAt": "2024-01-13T20:45:00Z"
+  },
+  {
+    "Id": 10,
+    "userId": 2,
+    "content": "User research session today revealed some surprising insights about how people interact with our interface. Time to iterate and improve!",
+    "mediaUrl": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 73,
+    "comments": 16,
+    "createdAt": "2024-01-13T18:20:00Z"
+  },
+  {
+    "Id": 11,
+    "userId": 3,
+    "content": "Excited to announce our new partnership with three amazing startups! Together, we're building the next generation of productivity tools.",
+    "mediaUrl": null,
+    "mediaType": null,
+    "likes": 189,
+    "comments": 52,
+    "createdAt": "2024-01-13T15:30:00Z"
+  },
+  {
+    "Id": 12,
+    "userId": 4,
+    "content": "Deep learning models are getting more sophisticated every day. Just published a paper on attention mechanisms in transformer architectures.",
+    "mediaUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+    "mediaType": "image",
+    "likes": 156,
+    "comments": 38,
+    "createdAt": "2024-01-13T13:10:00Z"
+  }
+]

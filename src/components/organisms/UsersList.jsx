@@ -1,0 +1,108 @@
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import UserCard from "@/components/molecules/UserCard";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import { usersService } from "@/services/api/usersService";
+import { followsService } from "@/services/api/followsService";
+
+const UsersList = ({ searchQuery = "", variant = "suggestions" }) => {
+  const [users, setUsers] = useState([]);
+  const [follows, setFollows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadUsers = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const [usersData, followsData] = await Promise.all([
+        usersService.getAll(),
+        followsService.getAll()
+      ]);
+      
+      let filteredUsers = usersData;
+      
+      if (searchQuery) {
+        filteredUsers = usersData.filter(user => 
+          user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+      
+      setUsers(filteredUsers);
+      setFollows(followsData);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, [searchQuery]);
+
+  const handleFollow = async (userId) => {
+    try {
+      await followsService.follow(userId);
+      setFollows(prev => [...prev, { followerId: 1, followingId: userId }]);
+    } catch (err) {
+      console.error("Failed to follow user:", err);
+    }
+  };
+
+  const handleUnfollow = async (userId) => {
+    try {
+      await followsService.unfollow(userId);
+      setFollows(prev => prev.filter(follow => follow.followingId !== userId));
+    } catch (err) {
+      console.error("Failed to unfollow user:", err);
+    }
+  };
+
+  const isFollowing = (userId) => {
+    return follows.some(follow => follow.followingId === userId);
+  };
+
+  if (loading) {
+    return <Loading variant="users" />;
+  }
+
+  if (error) {
+    return <Error message={error} onRetry={loadUsers} />;
+  }
+
+  if (users.length === 0) {
+    return (
+      <Empty 
+        variant={searchQuery ? "search" : "users"}
+        message={searchQuery ? "No users found" : "No users available"}
+      />
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {users.map((user) => (
+        <motion.div
+          key={user.Id}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <UserCard
+            user={user}
+            onFollow={handleFollow}
+            onUnfollow={handleUnfollow}
+            isFollowing={isFollowing(user.Id)}
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+export default UsersList;

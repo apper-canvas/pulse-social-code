@@ -5,25 +5,25 @@ import ApperIcon from "@/components/ApperIcon";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import { usersService } from "@/services/api/usersService";
-
+import { hashtagService } from "@/services/api/hashtagService";
 const TrendingSidebar = () => {
   const [suggestedUsers, setSuggestedUsers] = useState([]);
   const [trendingTopics, setTrendingTopics] = useState([]);
 
-  useEffect(() => {
+useEffect(() => {
     const loadSuggestions = async () => {
       try {
-        const users = await usersService.getAll();
-        setSuggestedUsers(users.slice(0, 3));
-        
-        // Mock trending topics
-        setTrendingTopics([
-          { tag: "#TechNews", posts: 12500 },
-          { tag: "#ReactJS", posts: 8300 },
-          { tag: "#WebDev", posts: 6200 },
-          { tag: "#AI", posts: 15400 },
-          { tag: "#OpenSource", posts: 4800 },
+        const [users, trending] = await Promise.all([
+          usersService.getAll(),
+          hashtagService.getTrendingHashtags(5)
         ]);
+        
+        setSuggestedUsers(users.slice(0, 3));
+        setTrendingTopics(trending.map(item => ({
+          tag: item.tag,
+          posts: item.posts,
+          displayTag: item.displayTag
+        })));
       } catch (error) {
         console.error("Failed to load suggestions:", error);
       }
@@ -42,10 +42,10 @@ const TrendingSidebar = () => {
       >
         <h2 className="text-xl font-bold text-white mb-4">Trending Topics</h2>
         <div className="space-y-3">
-          {trendingTopics.map((topic, index) => (
+{trendingTopics.map((topic, index) => (
             <Link
               key={topic.tag}
-              to={`/explore?tag=${topic.tag.slice(1)}`}
+              to={`/explore?tag=${topic.tag.replace('#', '')}`}
               className="block p-3 rounded-lg hover:bg-gray-800 transition-colors"
             >
               <div className="flex items-center justify-between">

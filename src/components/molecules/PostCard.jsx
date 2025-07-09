@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@/components/atoms/Avatar";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 import { toast } from "react-toastify";
 import { useNotifications } from "@/context/NotificationContext";
+import { hashtagService } from "@/services/api/hashtagService";
 const PostCard = ({ 
   post, 
   user, 
@@ -18,7 +20,8 @@ const PostCard = ({
   const [liked, setLiked] = useState(isLiked);
   const [likeCount, setLikeCount] = useState(post.likes || 0);
   const [showFullContent, setShowFullContent] = useState(false);
-  const { createNotification } = useNotifications();
+const { createNotification } = useNotifications();
+  const navigate = useNavigate();
 const handleLike = async () => {
     const newLikedState = !liked;
     setLiked(newLikedState);
@@ -53,6 +56,11 @@ const handleLike = async () => {
       onShare(post.Id);
     }
     toast.success("Post shared!", { autoClose: 1000 });
+toast.success("Post shared!", { autoClose: 1000 });
+  };
+
+  const handleHashtagClick = (hashtag) => {
+    navigate(`/explore?tag=${hashtag}`);
   };
 
   const isLongContent = post.content && post.content.length > 280;
@@ -60,6 +68,10 @@ const handleLike = async () => {
     ? post.content.slice(0, 280) + "..."
     : post.content;
 
+  const renderContent = (content) => {
+    const renderedContent = hashtagService.renderHashtags(content, handleHashtagClick);
+    return Array.isArray(renderedContent) ? renderedContent : content;
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -86,10 +98,10 @@ const handleLike = async () => {
       </div>
 
       {/* Content */}
-      {post.content && (
+{post.content && (
         <div className="mb-4">
           <p className="text-gray-100 leading-relaxed whitespace-pre-wrap">
-            {displayContent}
+            {renderContent(displayContent)}
           </p>
           {isLongContent && (
             <button

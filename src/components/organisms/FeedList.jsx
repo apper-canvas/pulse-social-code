@@ -7,24 +7,30 @@ import Empty from "@/components/ui/Empty";
 import { postsService } from "@/services/api/postsService";
 import { usersService } from "@/services/api/usersService";
 
-const FeedList = ({ refreshTrigger = 0 }) => {
+const FeedList = ({ refreshTrigger = 0, posts: externalPosts = null }) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const loadFeed = async () => {
+const loadFeed = async () => {
     try {
       setLoading(true);
       setError(null);
       
-      const [postsData, usersData] = await Promise.all([
-        postsService.getAll(),
-        usersService.getAll()
-      ]);
-      
-      setPosts(postsData);
-      setUsers(usersData);
+      if (externalPosts) {
+        const usersData = await usersService.getAll();
+        setPosts(externalPosts);
+        setUsers(usersData);
+      } else {
+        const [postsData, usersData] = await Promise.all([
+          postsService.getAll(),
+          usersService.getAll()
+        ]);
+        
+        setPosts(postsData);
+        setUsers(usersData);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -34,7 +40,7 @@ const FeedList = ({ refreshTrigger = 0 }) => {
 
   useEffect(() => {
     loadFeed();
-  }, [refreshTrigger]);
+  }, [refreshTrigger, externalPosts]);
 
 const handleLike = async (postId, isLiked) => {
     try {

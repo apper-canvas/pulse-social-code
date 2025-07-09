@@ -81,11 +81,21 @@ class PostsService {
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }
 
-  async getTrending(limit = 10) {
+async getTrending(limit = 10) {
     await this.delay();
     return this.posts
       .sort((a, b) => b.likes - a.likes)
       .slice(0, limit);
+  }
+
+  async searchByHashtag(hashtag) {
+    await this.delay();
+    const searchTag = hashtag.toLowerCase();
+    const normalizedTag = searchTag.startsWith('#') ? searchTag : `#${searchTag}`;
+    
+    return this.posts.filter(post => 
+      post.content && post.content.toLowerCase().includes(normalizedTag)
+    );
   }
 }
 

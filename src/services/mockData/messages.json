@@ -1,0 +1,128 @@
+[
+  {
+    "Id": 1,
+    "chatId": 1,
+    "senderId": 2,
+    "content": "Hey Alex! How's the new project coming along?",
+    "type": "text",
+    "createdAt": "2024-01-15T13:00:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 2,
+    "chatId": 1,
+    "senderId": 1,
+    "content": "It's going really well! I've been working on the user authentication system.",
+    "type": "text",
+    "createdAt": "2024-01-15T13:05:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 3,
+    "chatId": 1,
+    "senderId": 2,
+    "content": "That's awesome! I'd love to help with the frontend integration when you're ready.",
+    "type": "text",
+    "createdAt": "2024-01-15T13:10:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 4,
+    "chatId": 1,
+    "senderId": 1,
+    "content": "Actually, I could use some help with the React components. Are you free this week?",
+    "type": "text",
+    "createdAt": "2024-01-15T13:15:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 5,
+    "chatId": 1,
+    "senderId": 2,
+    "content": "That sounds like a great idea! Let's discuss it more tomorrow.",
+    "type": "text",
+    "createdAt": "2024-01-15T14:30:00Z",
+    "isRead": false
+  },
+  {
+    "Id": 6,
+    "chatId": 2,
+    "senderId": 3,
+    "content": "I reviewed your pull request. The code looks good overall!",
+    "type": "text",
+    "createdAt": "2024-01-15T11:30:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 7,
+    "chatId": 2,
+    "senderId": 3,
+    "content": "Just a few minor suggestions about the error handling.",
+    "type": "text",
+    "createdAt": "2024-01-15T11:35:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 8,
+    "chatId": 2,
+    "senderId": 1,
+    "content": "Thanks for the code review! I'll implement those changes.",
+    "type": "text",
+    "createdAt": "2024-01-15T12:15:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 9,
+    "chatId": 3,
+    "senderId": 4,
+    "content": "I just finished the new user interface mockups!",
+    "type": "text",
+    "createdAt": "2024-01-15T09:00:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 10,
+    "chatId": 3,
+    "senderId": 1,
+    "content": "Can't wait to see them! Send them over when you're ready.",
+    "type": "text",
+    "createdAt": "2024-01-15T09:15:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 11,
+    "chatId": 3,
+    "senderId": 4,
+    "content": "The new design looks amazing! 🎨",
+    "type": "text",
+    "createdAt": "2024-01-15T09:45:00Z",
+    "isRead": false
+  },
+  {
+    "Id": 12,
+    "chatId": 4,
+    "senderId": 5,
+    "content": "Hey! I wanted to talk about the mobile app architecture.",
+    "type": "text",
+    "createdAt": "2024-01-14T15:30:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 13,
+    "chatId": 4,
+    "senderId": 1,
+    "content": "Sure, let's schedule a meeting for next week.",
+    "type": "text",
+    "createdAt": "2024-01-14T16:20:00Z",
+    "isRead": true
+  },
+  {
+    "Id": 14,
+    "chatId": 4,
+    "senderId": 5,
+    "content": "Perfect! I'll send you a calendar invite.",
+    "type": "text",
+    "createdAt": "2024-01-14T16:25:00Z",
+    "isRead": true
+  }
+]

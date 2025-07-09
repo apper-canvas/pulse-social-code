@@ -1,0 +1,86 @@
+[
+  {
+    "Id": 1,
+    "participants": [
+      {
+        "Id": 1,
+        "username": "alexchen",
+        "displayName": "Alex Chen",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      },
+      {
+        "Id": 2,
+        "username": "sarah_dev",
+        "displayName": "Sarah Wilson",
+        "avatar": "https://images.unsplash.com/photo-1494790108755-2616b60c2468?w=150&h=150&fit=crop&crop=face"
+      }
+    ],
+    "lastMessage": "That sounds like a great idea! Let's discuss it more tomorrow.",
+    "lastMessageAt": "2024-01-15T14:30:00Z",
+    "unreadCount": 2,
+    "createdAt": "2024-01-10T08:00:00Z"
+  },
+  {
+    "Id": 2,
+    "participants": [
+      {
+        "Id": 1,
+        "username": "alexchen",
+        "displayName": "Alex Chen",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      },
+      {
+        "Id": 3,
+        "username": "mike_js",
+        "displayName": "Mike Johnson",
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+      }
+    ],
+    "lastMessage": "Thanks for the code review! I'll implement those changes.",
+    "lastMessageAt": "2024-01-15T12:15:00Z",
+    "unreadCount": 0,
+    "createdAt": "2024-01-08T10:30:00Z"
+  },
+  {
+    "Id": 3,
+    "participants": [
+      {
+        "Id": 1,
+        "username": "alexchen",
+        "displayName": "Alex Chen",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      },
+      {
+        "Id": 4,
+        "username": "emma_ui",
+        "displayName": "Emma Davis",
+        "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      }
+    ],
+    "lastMessage": "The new design looks amazing! 🎨",
+    "lastMessageAt": "2024-01-15T09:45:00Z",
+    "unreadCount": 1,
+    "createdAt": "2024-01-12T14:20:00Z"
+  },
+  {
+    "Id": 4,
+    "participants": [
+      {
+        "Id": 1,
+        "username": "alexchen",
+        "displayName": "Alex Chen",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      },
+      {
+        "Id": 5,
+        "username": "david_mobile",
+        "displayName": "David Kumar",
+        "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+      }
+    ],
+    "lastMessage": "Sure, let's schedule a meeting for next week.",
+    "lastMessageAt": "2024-01-14T16:20:00Z",
+    "unreadCount": 0,
+    "createdAt": "2024-01-05T11:00:00Z"
+  }
+]
